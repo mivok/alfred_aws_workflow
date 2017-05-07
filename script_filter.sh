@@ -8,7 +8,7 @@ cache_fail() {
     echo '{"items": [
         {
             "title": "Failed to get instance list",
-            "subtitle": "'"${1//\"/}"'"
+            "subtitle": "'"${1//[\"$'\r\n']/}"'"
         }
     ]}'
     exit 1
