@@ -29,6 +29,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>7CAD426F-D25C-4841-B835-A79E563BD385</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>46D40DFA-B1AD-4172-8FD1-363A41C0CF4F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>85118813-A59B-4E04-B0DD-F8D05120F46D</key>
 		<array>
 			<dict>
@@ -47,19 +60,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>578400D6-4D5E-48B3-9F83-28DBB38AAB1C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>EB6D4430-0E46-4F45-BF72-7A54AC231117</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>46D40DFA-B1AD-4172-8FD1-363A41C0CF4F</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -180,23 +180,58 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
 				<key>argumenttype</key>
-				<integer>0</integer>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
 				<key>keyword</key>
 				<string>aws-profile</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>#!/bin/bash
+if [[ -f "$alfred_workflow_data/current_aws_profile" ]]; then
+    CURRENT_PROFILE=$(&lt;"$alfred_workflow_data/current_aws_profile")
+fi
+if [[ -z $CURRENT_PROFILE ]]; then
+    CURRENT_PROFILE="default"
+fi
+echo '{"items": [
+    {
+        "title": "aws-profile",
+        "subtitle": "Set AWS Profile (current: '"$CURRENT_PROFILE"')",
+        "arg": "'"$1"'"
+    }
+]}'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
-				<string>Set AWS profile</string>
-				<key>text</key>
+				<string>Set AWS Profile</string>
+				<key>title</key>
 				<string>aws-profile</string>
+				<key>type</key>
+				<integer>0</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>EB6D4430-0E46-4F45-BF72-7A54AC231117</string>
+			<string>7CAD426F-D25C-4841-B835-A79E563BD385</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
@@ -318,6 +353,13 @@
 			<key>ypos</key>
 			<integer>20</integer>
 		</dict>
+		<key>7CAD426F-D25C-4841-B835-A79E563BD385</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
 		<key>839332F8-14AC-4BC7-A54E-55976DEF3DCA</key>
 		<dict>
 			<key>xpos</key>
@@ -345,13 +387,6 @@
 			<integer>90</integer>
 			<key>ypos</key>
 			<integer>20</integer>
-		</dict>
-		<key>EB6D4430-0E46-4F45-BF72-7A54AC231117</key>
-		<dict>
-			<key>xpos</key>
-			<integer>90</integer>
-			<key>ypos</key>
-			<integer>200</integer>
 		</dict>
 		<key>FF35695B-20A0-4B27-A1C1-F8D3D2568A0F</key>
 		<dict>
