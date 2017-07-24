@@ -45,9 +45,21 @@ verify_dependencies() {
 
 get_profile() {
     PROFILE_FILE="$alfred_workflow_data/current_aws_profile"
+    export AWS_PROFILE
     if [[ -f "$PROFILE_FILE" ]]; then
-        export AWS_PROFILE
         AWS_PROFILE=$(<"$PROFILE_FILE")
+    else
+        AWS_PROFILE="default"
+    fi
+}
+
+get_region() {
+    REGION_FILE="$alfred_workflow_data/current_aws_region"
+    export AWS_DEFAULT_REGION
+    if [[ -f "$REGION_FILE" ]]; then
+        AWS_DEFAULT_REGION=$(<"$REGION_FILE")
+    else
+        AWS_DEFAULT_REGION="us-east-1"
     fi
 }
 
@@ -64,6 +76,7 @@ query_instances() {
 
 verify_dependencies
 get_profile
-CACHE_FILE="$alfred_workflow_cache/$AWS_PROFILE.json"
+get_region
+CACHE_FILE="$alfred_workflow_cache/${AWS_PROFILE}_${AWS_DEFAULT_REGION}.json"
 refresh_cache_if_needed
 query_instances "$1"

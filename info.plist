@@ -55,6 +55,42 @@
 				<false/>
 			</dict>
 		</array>
+		<key>A2EAEC08-C1A2-463F-ABDC-DFCDB13B9415</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AC1A6A32-4616-44FA-85A4-84650E491C71</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>AC1A6A32-4616-44FA-85A4-84650E491C71</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>670760E3-B44A-44E5-B020-D769B251B734</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>9CD9D58D-9CD5-4A95-BB3E-9A9781CFB87D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DDC26738-261B-4BB0-B23A-916E77AA8153</key>
 		<array>
 			<dict>
@@ -95,8 +131,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>578400D6-4D5E-48B3-9F83-28DBB38AAB1C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -138,23 +193,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>transient</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>578400D6-4D5E-48B3-9F83-28DBB38AAB1C</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>adduuid</key>
 				<false/>
 				<key>allowemptyfiles</key>
@@ -182,6 +220,8 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -265,25 +305,114 @@ echo '{"items": [
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>adduuid</key>
 				<false/>
+				<key>allowemptyfiles</key>
+				<true/>
+				<key>createintermediatefolders</key>
+				<true/>
+				<key>filename</key>
+				<string>current_aws_region</string>
+				<key>filetext</key>
+				<string>{query}</string>
+				<key>relativepathmode</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.writefile</string>
+			<key>uid</key>
+			<string>670760E3-B44A-44E5-B020-D769B251B734</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>keyword</key>
+				<string>aws-region</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
-				<string>rm -f "$alfred_workflow_cache"/*.json</string>
+				<string>#!/bin/bash
+if [[ -f "$alfred_workflow_data/current_aws_region" ]]; then
+    CURRENT_REGION=$(&lt;"$alfred_workflow_data/current_aws_region")
+fi
+if [[ -z $CURRENT_REGION ]]; then
+    CURRENT_PROFILE="us-east-1"
+fi
+echo '{"items": [
+    {
+        "title": "aws-region",
+        "subtitle": "Set AWS Region (current: '"$CURRENT_REGION"')",
+        "arg": "'"$1"'"
+    }
+]}'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>subtext</key>
+				<string>Set AWS Region</string>
+				<key>title</key>
+				<string>aws-region</string>
 				<key>type</key>
 				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>FF35695B-20A0-4B27-A1C1-F8D3D2568A0F</string>
+			<string>A2EAEC08-C1A2-463F-ABDC-DFCDB13B9415</string>
 			<key>version</key>
 			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>AC1A6A32-4616-44FA-85A4-84650E491C71</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Region changed to {query}</string>
+				<key>title</key>
+				<string>AWS instance search</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9CD9D58D-9CD5-4A95-BB3E-9A9781CFB87D</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -305,6 +434,29 @@ echo '{"items": [
 			<string>1CAEBFD4-B515-4D37-97BD-FD367D17FC3E</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>rm -f "$alfred_workflow_cache"/*.json</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>FF35695B-20A0-4B27-A1C1-F8D3D2568A0F</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -337,7 +489,7 @@ echo '{"items": [
 			<key>xpos</key>
 			<integer>470</integer>
 			<key>ypos</key>
-			<integer>410</integer>
+			<integer>640</integer>
 		</dict>
 		<key>46D40DFA-B1AD-4172-8FD1-363A41C0CF4F</key>
 		<dict>
@@ -352,6 +504,13 @@ echo '{"items": [
 			<integer>470</integer>
 			<key>ypos</key>
 			<integer>20</integer>
+		</dict>
+		<key>670760E3-B44A-44E5-B020-D769B251B734</key>
+		<dict>
+			<key>xpos</key>
+			<integer>470</integer>
+			<key>ypos</key>
+			<integer>390</integer>
 		</dict>
 		<key>7CAD426F-D25C-4841-B835-A79E563BD385</key>
 		<dict>
@@ -372,7 +531,28 @@ echo '{"items": [
 			<key>xpos</key>
 			<integer>90</integer>
 			<key>ypos</key>
-			<integer>410</integer>
+			<integer>640</integer>
+		</dict>
+		<key>9CD9D58D-9CD5-4A95-BB3E-9A9781CFB87D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>470</integer>
+			<key>ypos</key>
+			<integer>520</integer>
+		</dict>
+		<key>A2EAEC08-C1A2-463F-ABDC-DFCDB13B9415</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>450</integer>
+		</dict>
+		<key>AC1A6A32-4616-44FA-85A4-84650E491C71</key>
+		<dict>
+			<key>xpos</key>
+			<integer>330</integer>
+			<key>ypos</key>
+			<integer>480</integer>
 		</dict>
 		<key>D000D7E2-8D3B-496A-BC09-E3EA625D1801</key>
 		<dict>
@@ -393,7 +573,7 @@ echo '{"items": [
 			<key>xpos</key>
 			<integer>290</integer>
 			<key>ypos</key>
-			<integer>410</integer>
+			<integer>640</integer>
 		</dict>
 	</dict>
 	<key>variables</key>
