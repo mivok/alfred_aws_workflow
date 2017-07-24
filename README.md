@@ -19,6 +19,8 @@ Finally, download and open the workflow.
 
 * `aws-profile` - set the AWS profile to use for searches. If this isn't set,
   then the default profile is used.
+* `aws-region` - set the AWS profile to use for searches. If this isn't set,
+  then the us-east-1 is used.
 * `aws-clear-cache` - The workflow keep a cache of all instances for use when
   searching, and will update this once an hour (by default). Run
   `aws-clear-cache` to clear the cache before this time if you need the cache
